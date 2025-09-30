@@ -1,0 +1,26 @@
+.glassCard {
+  background: rgba(255, 255, 255, 0.29);
+  backdrop-filter: blur(9px);
+  -webkit-backdrop-filter: blur(9px);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.5),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.1),
+    inset 0 0 0px 0px rgba(255, 255, 255, 0);
+  position: relative;
+  overflow: visible; /* allow children to be visible */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #000; /* text color for children */
+  font-size: 24px;
+  text-align: center;
+  padding: 1rem;
+}
+
+.glassCard::before,
+.glassCard::after {
+  pointer-events: none; /* allow clicks inside card */
+}
