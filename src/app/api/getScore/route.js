@@ -6,12 +6,12 @@ export async function GET() {
     await connectToDB();
 
     // Fetching all scores in descending order
-    const allScores = await Score.find({})
+    const allScores = await Score.find()
       .sort({ score: -1 }); // Sort by score descending
 
     // Map results
     const formattedScores = allScores.map((item) => ({
-      _id: item._id.toString(),
+      _id: item._id?.toString(),
       name: item.name || "Unknown",
       score: item.score || 0,
       createdAt: item.createdAt,

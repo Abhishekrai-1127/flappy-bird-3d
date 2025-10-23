@@ -9,8 +9,8 @@ import GlassCard from "@/components/GlassCard";
 const BIRD_SIZE = 40;
 const PIPE_WIDTH = 60;
 const PIPE_GAP = 300;
-const INITIAL_GRAVITY = 0.6;   // ✅ smaller gravity for smoother fall
-const INITIAL_JUMP_STRENGTH = -8; // ✅ smaller negative jump velocity
+const INITIAL_GRAVITY = 0.6;
+const INITIAL_JUMP_STRENGTH = -8;
 const INITIAL_GAME_SPEED = 2;
 const INITIAL_PIPE_INTERVAL = 2000;
 const BIRD_X = 100;
@@ -95,10 +95,10 @@ export default function Game({ playerName }) {
     let animationId;
 
     const loop = () => {
-      // ✅ Apply gravity to velocity
+      // Apply gravity to velocity
       velocityRef.current += gravityRef.current;
 
-      // ✅ Update bird position using velocity
+      //  Update bird position using velocity
       setBirdY((prev) => Math.max(0, prev + velocityRef.current));
 
       // Move pipes
@@ -252,58 +252,80 @@ export default function Game({ playerName }) {
       {/* Start Game Overlay with video + GlassCard */}
       {!gameStarted && (
         <div className="relative w-full h-screen overflow-hidden">
-          <video
-            className="absolute top-0 left-0 w-full h-full object-cover z-0"
-            src="/flappy-bird.mp4"
-            autoPlay
-            loop
-            muted
-            playsInline
-          />
-          <div className="absolute inset-0 flex items-center justify-center z-10">
-            <GlassCard height="200px" width="400px">
-              <div className="flex flex-col items-center justify-center gap-4 p-4">
-                <h1 className="text-4xl font-bold text-white text-center">
-                  Flappy Bird 3D
-                </h1>
-                <button
-                  onClick={handleStartGame}
-                  className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition"
-                >
-                  Start Game
-                </button>
-              </div>
-            </GlassCard>
-          </div>
-        </div>
+  {/* Background Video */}
+  <video
+    className="absolute top-0 left-0 w-full h-full object-cover z-0"
+    src="/flappy-bird.mp4"
+    autoPlay
+    loop
+    muted
+    playsInline
+  />
+
+  {/* Centered Glass Card */}
+  <div className="absolute inset-0 flex items-center justify-center z-10 px-4">
+    <GlassCard
+      height="auto"
+      width="full"
+      className="w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg p-6 sm:p-8 md:p-10"
+    >
+      <div className="flex flex-col items-center justify-center gap-4">
+        <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white text-center drop-shadow-lg">
+          Flappy Bird 3D
+        </h1>
+
+        <button
+          onClick={handleStartGame}
+          className="px-6 py-3 sm:px-8 sm:py-3 bg-blue-600 text-white rounded-lg text-sm sm:text-base md:text-lg font-semibold hover:bg-blue-700 transition"
+        >
+          Start Game
+        </button>
+      </div>
+    </GlassCard>
+  </div>
+</div>
+
       )}
 
       {/* Game Over Overlay with GlassCard */}
       {isGameOver && (
-        <div className="absolute inset-0 flex items-center justify-center z-20">
-          <GlassCard height="250px" width="400px">
-            <div className="flex flex-col items-center justify-center gap-4 p-4 text-white">
-              <h1 className="text-4xl font-extrabold text-center mb-2">
-                Game Over
-              </h1>
-              <p className="text-2xl text-center mb-4">Final Score: {score}</p>
-              <div className="flex justify-evenly gap-4 w-full">
-                <button
-                  onClick={handleRestart}
-                  className="px-4 py-2 bg-blue-600 rounded-lg text-white hover:bg-blue-700 transition"
-                >
-                  Play Again
-                </button>
-                <button
-                  onClick={handleLogout}
-                  className="px-4 py-2 bg-red-600 rounded-lg text-white hover:bg-red-700 transition"
-                >
-                  Logout
-                </button>
-              </div>
-            </div>
-          </GlassCard>
-        </div>
+        <div className="absolute inset-0 flex items-center justify-center z-20 px-4">
+  <GlassCard
+    height="auto"
+    width="full"
+    className="w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg p-6 sm:p-8"
+  >
+    <div className="flex flex-col items-center justify-center gap-4 text-white text-center">
+      {/* Title */}
+      <h1 className="text-2xl sm:text-3xl md:text-4xl font-extrabold mb-2">
+        Game Over
+      </h1>
+
+      {/* Score */}
+      <p className="text-lg sm:text-xl md:text-2xl mb-4">
+        Final Score: {score}
+      </p>
+
+      {/* Buttons */}
+      <div className="flex flex-col sm:flex-row justify-center items-center gap-4 w-full">
+        <button
+          onClick={handleRestart}
+          className="w-full sm:w-auto px-6 py-2 sm:px-8 sm:py-3 bg-blue-600 rounded-lg text-white text-sm sm:text-base hover:bg-blue-700 transition"
+        >
+          Play Again
+        </button>
+
+        <button
+          onClick={handleLogout}
+          className="w-full sm:w-auto px-6 py-2 sm:px-8 sm:py-3 bg-red-600 rounded-lg text-white text-sm sm:text-base hover:bg-red-700 transition"
+        >
+          Logout
+        </button>
+      </div>
+    </div>
+  </GlassCard>
+</div>
+
       )}
     </div>
   );

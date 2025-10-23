@@ -4,7 +4,7 @@ import axios from "axios";
 export const ScoreApi = async ({ name, score }) => {
   try {
     const response = await axios.post(
-      "/api/score",
+      "/api/getScore",
       {
         name: name.trim(), 
         score: score,

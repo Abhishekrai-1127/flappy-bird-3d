@@ -17,7 +17,7 @@ export async function POST(request) {
         const newScore = await score.findByIdAndUpdate(
             id,
             { score: currScore },
-            { new: true, upsert: true }
+            // { upsert: true }
         );
 
 
